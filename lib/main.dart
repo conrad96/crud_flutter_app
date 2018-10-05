@@ -12,7 +12,13 @@ class CrudApp extends StatelessWidget
         appBar: AppBar(
           title: Text("CRUD")
         ),
-         body: Layout()
+         body: Center(
+           child: ListView(
+            children: <Widget>[
+              Layout()
+            ],
+           ),
+         )
       ),
     );
   }
