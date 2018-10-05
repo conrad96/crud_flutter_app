@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Fri Oct 05 14:40:07 EAT 2018
+#Fri Oct 05 15:33:18 EAT 2018
 4.path=flutter_assets/vm_snapshot_data
 8.set=ASSET
 6.path=flutter_assets/fonts/MaterialIcons-Regular.ttf
