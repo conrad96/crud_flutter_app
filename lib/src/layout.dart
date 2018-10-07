@@ -1,4 +1,7 @@
 import "package:flutter/material.dart";
+import "../main.dart";
+import "dart:async";
+import "package:http/http.dart" as http;
 
 class Layout extends StatefulWidget
 {
@@ -7,12 +10,31 @@ class Layout extends StatefulWidget
     return new LayoutState();
   }
 }
+class RegUser {
+  String username;
+  String password;
+  RegUser({this.username,this.password});
+  factory RegUser.fromJson(Map<String,dynamic> json){
+    return RegUser(
+      username: json['uname'],
+      password: json['pwd']
+    );
+  }
+}
 class LayoutState extends State<Layout>
 {
   final formKey = GlobalKey<FormState>();
+  final String ip = "192.168.1.118";
+
   String uname="";
   String pwd ="";
   String cpwd ="";
+
+  Future<RegUser> registerUser($arg1,$arg2) async{
+    // var response= 
+    // return http.post("http://$ip/crud_flutter/add_data.php?uname=$arg1&pwd=$arg2");
+  }
+
   Widget build(context)
   {
     return Container(
@@ -80,9 +102,9 @@ class LayoutState extends State<Layout>
         {
           return "Password should be more than 5 characters";
         }
-        if(!pwd.isEmpty )
+        if(pwd.isNotEmpty)
         {
-          if(arg != pwd)
+          if(arg.toLowerCase() != pwd.toLowerCase())
             {
               return "Password Mismatch. Try Again";
             }
@@ -101,7 +123,7 @@ class LayoutState extends State<Layout>
         if(formKey.currentState.validate())
         {
           //check pwd nd cpwd
-          print("okay");
+         // print(getUsers());
         }
       },
       color: Colors.teal,
