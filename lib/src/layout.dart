@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "../main.dart";
 import "dart:async";
 import "package:http/http.dart" as http;
+import "dart:convert";
 
 class Layout extends StatefulWidget
 {
@@ -11,13 +12,13 @@ class Layout extends StatefulWidget
   }
 }
 class RegUser {
-  String username;
-  String password;
-  RegUser({this.username,this.password});
+  String code;
+  String message;
+  RegUser({this.code,this.message});
   factory RegUser.fromJson(Map<String,dynamic> json){
     return RegUser(
-      username: json['uname'],
-      password: json['pwd']
+      code: json['code'],
+      message: json['message']
     );
   }
 }
@@ -30,9 +31,10 @@ class LayoutState extends State<Layout>
   String pwd ="";
   String cpwd ="";
 
-  Future<RegUser> registerUser($arg1,$arg2) async{
-    // var response= 
-    // return http.post("http://$ip/crud_flutter/add_data.php?uname=$arg1&pwd=$arg2");
+  Future<RegUser> registerUser(String arg1,String arg2) async
+  {
+     var response= await http.post("http://$ip/crud_flutter/add_data.php?uname=${arg1}&pwd=${arg2}");
+     return RegUser.fromJson(json.decode(response.body));
   }
 
   Widget build(context)
@@ -123,7 +125,7 @@ class LayoutState extends State<Layout>
         if(formKey.currentState.validate())
         {
           //check pwd nd cpwd
-         // print(getUsers());
+         registerUser(uname,pwd);
         }
       },
       color: Colors.teal,

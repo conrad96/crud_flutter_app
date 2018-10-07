@@ -48,19 +48,16 @@ class CrudApp extends StatelessWidget
           title: Text("CRUD")
         ),
          body: Center(
-           child:  FutureBuilder<Users>(
-                future: getUsers(),
-                builder: (context,snapshot){
-                  if(snapshot.hasData)
-                  {
-                    return Text("${snapshot.data.uname_db},${snapshot.data.pwd_db}");
-                  }else
-                   if (snapshot.hasError) {
-                       return Text("${snapshot.error}");
-                     }
-                  return CircularProgressIndicator();
-                },
-              )
+           child:  Column(
+             children: <Widget>[
+               Layout(),
+               FutureBuilder<RegUser>(
+                 builder: (context,snapshot){
+                   
+                 },
+               )
+             ]
+           )
          )
       ),
     );
