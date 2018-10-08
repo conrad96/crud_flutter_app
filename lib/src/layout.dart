@@ -34,7 +34,15 @@ class LayoutState extends State<Layout>
   Future<RegUser> registerUser(String arg1,String arg2) async
   {
      var response= await http.post("http://$ip/crud_flutter/add_data.php?uname=${arg1}&pwd=${arg2}");
-     return RegUser.fromJson(json.decode(response.body));
+
+     if(response.statusCode == 200)
+     {
+       return RegUser.fromJson(json.decode(response.body));
+     }
+     else 
+     {
+      throw Exception('Failed to Post Data');
+     }
   }
 
   Widget build(context)
