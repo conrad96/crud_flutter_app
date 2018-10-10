@@ -8,7 +8,8 @@ void main() => runApp(new CrudApp());
 
 class CrudApp extends StatelessWidget
 {
- 
+
+  
   Widget build(context)
   {
     return MaterialApp(
@@ -19,12 +20,7 @@ class CrudApp extends StatelessWidget
          body: Center(
            child:  Column(
              children: <Widget>[
-               Layout(),
-               FutureBuilder<RegUser>(
-                 builder: (context,snapshot){
-                   
-                 },
-               )
+               Layout()
              ]
            )
          )

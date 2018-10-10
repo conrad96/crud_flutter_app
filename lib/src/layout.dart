@@ -11,10 +11,13 @@ class Layout extends StatefulWidget
     return new LayoutState();
   }
 }
-class RegUser {
+
+class RegUser 
+{
   String code;
   String message;
   RegUser({this.code,this.message});
+
   factory RegUser.fromJson(Map<String,dynamic> json){
     return RegUser(
       code: json['code'],
@@ -22,27 +25,30 @@ class RegUser {
     );
   }
 }
+
 class LayoutState extends State<Layout>
 {
   final formKey = GlobalKey<FormState>();
-  final String ip = "192.168.1.118";
+  final String ip = "192.168.43.173";
 
   String uname="";
   String pwd ="";
   String cpwd ="";
 
-  Future<RegUser> registerUser(String arg1,String arg2) async
+//  var url = "http://example.com/whatsit/create";
+// http.post(url, body: {"name": "doodle", "color": "blue"})
+//     .then((response) {
+//   print("Response status: ${response.statusCode}");
+//   print("Response body: ${response.body}");
+// });
+  registerUser() async
   {
-     var response= await http.post("http://$ip/crud_flutter/add_data.php?uname=${arg1}&pwd=${arg2}");
-
-     if(response.statusCode == 200)
-     {
-       return RegUser.fromJson(json.decode(response.body));
-     }
-     else 
-     {
-      throw Exception('Failed to Post Data');
-     }
+      String url = "http://$ip/crud_flutter/add_data.php";
+      var response = await http.post(url,
+      body: {"uname":this.uname,"pwd":this.pwd }
+      ).then((r){
+      print("Response body: ${r.body}");
+      });
   }
 
   Widget build(context)
@@ -57,12 +63,14 @@ class LayoutState extends State<Layout>
             password(),
             cpassword(),
             Container(margin: EdgeInsets.only(top:15.0)),
-            submitBtn()
+            submitBtn(),
+            //messageBody()
           ]
         ) 
       )
     );
   }
+
   Widget username(){
     return TextFormField(
       decoration: InputDecoration(
@@ -74,8 +82,8 @@ class LayoutState extends State<Layout>
           return "Username should be atleast more than  5 characters";
         }
       },
-      onSaved: (String arg){
-        uname = arg;
+      onSaved: (String argu){
+        uname = argu;
       },
     );
   }
@@ -93,9 +101,9 @@ class LayoutState extends State<Layout>
           return "Password should be more than 5 characters";
         }
       },
-      onSaved: (String arg)
+      onSaved: (String argp)
       {
-        pwd = arg;
+        pwd = argp;
       },
     );
   }
@@ -132,8 +140,8 @@ class LayoutState extends State<Layout>
       onPressed: (){
         if(formKey.currentState.validate())
         {
-          //check pwd nd cpwd
-         registerUser(uname,pwd);
+          formKey.currentState.save();
+          registerUser();  
         }
       },
       color: Colors.teal,
