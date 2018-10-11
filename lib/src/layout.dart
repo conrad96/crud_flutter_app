@@ -35,12 +35,6 @@ class LayoutState extends State<Layout>
   String pwd ="";
   String cpwd ="";
 
-//  var url = "http://example.com/whatsit/create";
-// http.post(url, body: {"name": "doodle", "color": "blue"})
-//     .then((response) {
-//   print("Response status: ${response.statusCode}");
-//   print("Response body: ${response.body}");
-// });
   registerUser() async
   {
       String url = "http://$ip/crud_flutter/add_data.php";
@@ -64,7 +58,7 @@ class LayoutState extends State<Layout>
             cpassword(),
             Container(margin: EdgeInsets.only(top:15.0)),
             submitBtn(),
-            //messageBody()
+           
           ]
         ) 
       )
