@@ -29,7 +29,7 @@ class RegUser
 class LayoutState extends State<Layout>
 {
   final formKey = GlobalKey<FormState>();
-  final String ip = "192.168.43.173";
+  final String ip = "192.168.1.118";
 
   String uname="";
   String pwd ="";
@@ -39,12 +39,27 @@ class LayoutState extends State<Layout>
   {
       String url = "http://$ip/crud_flutter/add_data.php";
       var response = await http.post(url,
-      body: {"uname":this.uname,"pwd":this.pwd }
+      body: {"uname":this.uname,"pwd":this.cpwd }
       ).then((r){
-      print("Response body: ${r.body}");
+
+      var obj=json.decode(r.body);
+      message(obj["message"],obj["code"]);
+
       });
   }
+  Widget message(String str,int code)
+  {
+    if(code == 100)
+      {
+        return Text(str,
+          style: new TextStyle(fontWeight: FontWeight.bold,color: Colors.green),
 
+        );
+      }
+    return Text(str,
+      style: new TextStyle(fontWeight: FontWeight.bold,color: Colors.red),
+    );
+  }
   Widget build(context)
   {
     return Container(
@@ -58,7 +73,7 @@ class LayoutState extends State<Layout>
             cpassword(),
             Container(margin: EdgeInsets.only(top:15.0)),
             submitBtn(),
-           
+
           ]
         ) 
       )
@@ -108,19 +123,18 @@ class LayoutState extends State<Layout>
       decoration: InputDecoration(
         labelText: "Confirm Password"
       ),
-      validator: (String arg)
+      validator: (String cp)
       {
-        if(arg.length < 5)
+        if(cp.length < 5)
         {
           return "Password should be more than 5 characters";
         }
-        if(pwd.isNotEmpty)
-        {
-          if(arg.toLowerCase() != pwd.toLowerCase())
-            {
-              return "Password Mismatch. Try Again";
-            }
-        }
+
+        if(cp.compareTo(this.pwd) != 0)
+          {
+            return "Password Mismatch. Try Again";
+          }
+
       },
       onSaved: (String arg)
       {
