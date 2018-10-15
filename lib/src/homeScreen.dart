@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import "loginScreen.dart";
 import "registerScreen.dart";
+import "../icons/crud_app_icons.dart" as customIcon;
 
 class homeScreen extends StatelessWidget
 {
@@ -20,7 +21,7 @@ class homeScreen extends StatelessWidget
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.group),
+            icon: Icon(customIcon.Crud_app.user_add),
             onPressed: (){
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => register())
@@ -30,7 +31,7 @@ class homeScreen extends StatelessWidget
 
           ),
           IconButton(
-            icon: Icon(Icons.account_box),
+            icon: Icon(customIcon.Crud_app.login),
             onPressed: ()
             {
               Navigator.push(context,
@@ -41,6 +42,9 @@ class homeScreen extends StatelessWidget
           )
 
         ],
+      ),
+      body: Center(
+        child: ,
       ),
 
     );
