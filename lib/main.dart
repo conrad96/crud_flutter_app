@@ -8,7 +8,11 @@ class CrudApp extends StatelessWidget
   Widget build(context)
   {
     return MaterialApp(
+      title: "CRUD Application ",
       home: homeScreen(),
+      theme: ThemeData(
+        primarySwatch: Colors.lightBlue,
+      ),
     );
   }
 }
