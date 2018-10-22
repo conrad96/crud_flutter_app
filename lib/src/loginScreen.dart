@@ -6,6 +6,7 @@ class login extends StatelessWidget
   {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.orange,
         title: Text("Login"),
       ),
       body: loginScreen(),
@@ -60,7 +61,7 @@ class _loginScreenState extends State<loginScreen>
   {
     return RaisedButton(
       onPressed: (){},
-      color: Colors.green,
+      color: Colors.orangeAccent.shade200,
       child: Text("Login"),
     );
   }

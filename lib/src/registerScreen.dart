@@ -6,6 +6,7 @@ class register extends StatelessWidget
   {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.orange,
         title: Text("Register"),
 
       ),
@@ -79,6 +80,7 @@ class _registerScreen extends State<registerScreen>
   Widget registerBtn()
   {
     return RaisedButton(
+      color: Colors.orangeAccent.shade200,
       child: Text("Register"),
       onPressed: (){},
     );

@@ -9,6 +9,7 @@ class homeScreen extends StatelessWidget
   {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.orange,
         title: Text("Home"),
         leading: IconButton(
           icon: Icon(Icons.home),
@@ -49,30 +50,31 @@ class homeScreen extends StatelessWidget
             Container(margin: EdgeInsets.only(top:35.0)),
             topIcon(),
             Container(margin: EdgeInsets.only(top:35.0)),
-            buttons()
+            buttons(context)
           ]
         )
       ),
 
     );
   }
-  Widget buttons()
+  Widget buttons(context)
   {
     return Container(
       margin: EdgeInsets.only(top:25.0,left:25.0,right:25.0),
-    child: Column(
+    child: Row(
       children: <Widget>[
-        registerBtn(),
-        loginBtn()
+        registerBtn(context),
+       Container(margin: EdgeInsets.only(left: 80.0),),
+        loginBtn(context)
         ],
       )
     );
   }
   Widget topIcon()
   {
-    return Icon(Icons.portrait,size: 100.0,color: Colors.lightBlue);
+    return Icon(Icons.portrait,size: 100.0,color: Colors.orangeAccent);
   }
-  Widget registerBtn()
+  Widget registerBtn(context)
   {
     // return RaisedButton.icon(
     //   onPressed: (){},
@@ -84,32 +86,39 @@ class homeScreen extends StatelessWidget
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: Material(
         borderRadius: BorderRadius.circular(80.0),
-        shadowColor: Colors.teal.shade100,
+        shadowColor: Colors.orangeAccent.shade200,
         
         child: MaterialButton(
           minWidth: 95.0,
           height: 42.0,
-          onPressed: (){},
-          color: Colors.lightBlueAccent,
+          onPressed: (){
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => register()));
+          },
+          color: Colors.orangeAccent,
           child: Text("Register", style: TextStyle(color: Colors.white)),    
         ),
 
       )
     );
   }
-  Widget loginBtn()
+  Widget loginBtn(context)
   {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: Material(
         borderRadius: BorderRadius.circular(80.0),
-        shadowColor: Colors.teal.shade100,
+        shadowColor: Colors.orangeAccent.shade200,
         
         child: MaterialButton(
           minWidth: 95.0,
           height: 42.0,
-          onPressed: (){},
-          color: Colors.lightBlueAccent,
+          onPressed: (){
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => login())
+            );
+          },
+          color: Colors.orangeAccent,
           child: Text("Login", style: TextStyle(color: Colors.white)),    
         ),
 
