@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import "package:http/http.dart" as http;
+import "dart:convert";
 
 class login extends StatelessWidget
 {
@@ -23,9 +25,13 @@ class loginScreen extends StatefulWidget
 }
 class _loginScreenState extends State<loginScreen>
 {
+  final loginKey = GlobalKey<FormState>();
+  String em="";
+  String pass="";
   Widget build(context)
   {
     return Form(
+      key: loginKey,
       child: Container(
         margin: EdgeInsets.all(10.0),
         child: Column(
@@ -45,6 +51,9 @@ class _loginScreenState extends State<loginScreen>
       decoration: InputDecoration(
         labelText: "Email Address",
       ),
+      onSaved: (String arg){
+        em=arg;
+      },
     );
   }
   password()
@@ -55,12 +64,18 @@ class _loginScreenState extends State<loginScreen>
       decoration: InputDecoration(
         labelText: "Password",
       ),
+      onSaved: (String arg){
+        pass=arg;
+      },
     );
   }
   submit()
   {
     return RaisedButton(
-      onPressed: (){},
+      onPressed: (){
+        loginKey.currentState.save();
+
+      },
       color: Colors.orangeAccent.shade200,
       child: Text("Login"),
     );

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import "package:http/http.dart" as http;
+import "dart:convert";
+
 
 class register extends StatelessWidget
 {
@@ -24,9 +27,17 @@ class registerScreen extends StatefulWidget
 }
 class _registerScreen extends State<registerScreen>
 {
+  String un="";
+  String em = "";
+  String pas ="";
+  final regKey = GlobalKey<FormState>();
+
   Widget build(context)
   {
+
+
     return Form(
+      key: regKey,
       child: Container(
         margin: EdgeInsets.all(10.0),
         child: Column(
@@ -48,6 +59,10 @@ class _registerScreen extends State<registerScreen>
       decoration: InputDecoration(
         labelText: "Username",
       ),
+      onSaved: (String arg)
+        {
+          un = arg;
+        },
     );
   }
   Widget email()
@@ -57,6 +72,10 @@ class _registerScreen extends State<registerScreen>
       decoration: InputDecoration(
         labelText: "Email Address",
       ),
+      onSaved: (String arg){
+        em=arg;
+      },
+
     );
   }
   Widget password()
@@ -66,6 +85,9 @@ class _registerScreen extends State<registerScreen>
       decoration: InputDecoration(
         labelText: "Password",
       ),
+      onSaved: (String arg){
+        pas=arg;
+      },
     );
   }
   Widget cpassword()
@@ -82,7 +104,13 @@ class _registerScreen extends State<registerScreen>
     return RaisedButton(
       color: Colors.orangeAccent.shade200,
       child: Text("Register"),
-      onPressed: (){},
+      onPressed: (){
+        regKey.currentState.save();
+        var url = "http://192.168.1.118/portal/register.php";
+        http.post(url,body:{"uname":un,"email":em,"password":pas}).then((response){
+          print("${response.statusCode} \n ${response.body}");
+        });
+      },
     );
   }
 }
