@@ -45,13 +45,9 @@ class homeScreen extends StatelessWidget
         ],
       ),
       body: Center(
-        child: Column(
-          children: <Widget>[
-            Container(margin: EdgeInsets.only(top:35.0)),
-            topIcon(),
-            Container(margin: EdgeInsets.only(top:35.0)),
-            buttons(context)
-          ]
+        child: Container(
+          margin: EdgeInsets.all(10.0),
+          
         )
       ),
 

@@ -11,7 +11,7 @@ class CrudApp extends StatelessWidget
       title: "CRUD Application ",
       home: homeScreen(),
       theme: ThemeData(
-        primarySwatch: Colors.lightBlue,
+        primarySwatch: Colors.orange,
       ),
     );
   }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import "package:http/http.dart" as http;
 import "dart:convert";
+import "notifications.dart";
+import "homepage.dart";
+import "invalid.dart";
 
 class login extends StatelessWidget
 {
@@ -25,9 +28,12 @@ class loginScreen extends StatefulWidget
 }
 class _loginScreenState extends State<loginScreen>
 {
+
+
   final loginKey = GlobalKey<FormState>();
   String em="";
   String pass="";
+
   Widget build(context)
   {
     return Form(
@@ -74,7 +80,18 @@ class _loginScreenState extends State<loginScreen>
     return RaisedButton(
       onPressed: (){
         loginKey.currentState.save();
+        var url = "http://192.168.1.118/portal/login.php";
+        http.post(url,body: {"email":em,"password":pass}).then((response)
+        {
+         Map<String,dynamic> message = json.decode(response.body);
+         print(message['status']);
 
+         if(message['status']=='100')
+           {
+            Navigator.push(context,MaterialPageRoute(builder: (context)=>HomePage()));
+           }
+         
+        });
       },
       color: Colors.orangeAccent.shade200,
       child: Text("Login"),

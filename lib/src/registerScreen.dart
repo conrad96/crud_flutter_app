@@ -53,6 +53,8 @@ class _registerScreen extends State<registerScreen>
       ),
     );
   }
+
+
   Widget username()
   {
     return TextFormField(
@@ -109,6 +111,7 @@ class _registerScreen extends State<registerScreen>
         var url = "http://192.168.1.118/portal/register.php";
         http.post(url,body:{"uname":un,"email":em,"password":pas}).then((response){
           print("${response.statusCode} \n ${response.body}");
+
         });
       },
     );
